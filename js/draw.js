@@ -296,10 +296,9 @@ function initDraw() {
 	function exportJson() {
 		const exportObject = generateExportObject()
 
-		let jsonString = JSON.stringify(exportObject, null, "\t")
+		let jsonString = JSON.stringify(exportObject)
 		jsonString = jsonString.split("\n")
 		jsonString = jsonString.join("\n    ")
-		jsonString = "    " + jsonString
 		exportArea.value = jsonString
 
 		let directPostUrl = "https://www.discord.gg/"
