@@ -301,7 +301,7 @@ function initDraw() {
 		jsonString = jsonString.join("\n    ")
 		exportArea.value = jsonString
 
-		let directPostUrl = "https://www.discord.gg/"
+		let directPostUrl = "https://discord.gg/vAdMCCaXXR"
 		document.getElementById("exportDirectPost").href = directPostUrl
 
 		exportModal.show()
