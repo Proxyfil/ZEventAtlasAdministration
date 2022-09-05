@@ -279,8 +279,8 @@ function renderBackground(atlas) {
 
 	backgroundContext.clearRect(0, 0, canvas.width, canvas.height)
 
-	//backgroundCanvas.width = 1000 * zoom
-	//backgroundCanvas.height = 1000 * zoom
+	//backgroundCanvas.width = 500 * zoom
+	//backgroundCanvas.height = 500 * zoom
 
 	//backgroundContext.lineWidth = zoom
 
@@ -581,8 +581,8 @@ async function render() {
 
 	context.clearRect(0, 0, canvas.width, canvas.height)
 
-	//canvas.width = 1000*zoom
-	//canvas.height = 1000*zoom
+	//canvas.width = 500*zoom
+	//canvas.height = 500*zoom
 
 	context.globalCompositeOperation = "source-over"
 	context.clearRect(0, 0, canvas.width, canvas.height)
