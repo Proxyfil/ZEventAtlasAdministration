@@ -21,7 +21,7 @@ let previousZoomOrigin = [0, 0]
 let previousScaleZoomOrigin = [0, 0]
 
 const backgroundCanvas = document.createElement("canvas")
-backgroundCanvas.width = 500
+backgroundCanvas.width = 700
 backgroundCanvas.height = 500
 const backgroundContext = backgroundCanvas.getContext("2d")
 
@@ -473,7 +473,7 @@ function buildObjectsList(filter = null, sort = null) {
 				]
 
 				scaleZoomOrigin = [
-					500 / 2 - this.entry.center[0]
+					700 / 2 - this.entry.center[0]
 					, 500 / 2 - this.entry.center[1]
 				]
 
@@ -813,7 +813,7 @@ function highlightEntryFromUrl() {
 			]
 
 			scaleZoomOrigin = [
-				500 / 2 - entry.center[0]// + container.offsetLeft
+				700 / 2 - entry.center[0]// + container.offsetLeft
 				, 500 / 2 - entry.center[1]// + container.offsetTop
 			]
 
