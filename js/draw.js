@@ -254,7 +254,7 @@ function initDraw() {
 			id: entryId,
 			name: nameField.value,
 			description: descriptionField.value,
-			links: {},
+			links: {streamer:[],discord:[],website:[],subreddit:[],wiki:[]},
 			path: {},
 			center: {},
 		}
