@@ -14,7 +14,6 @@
 */
 
 const variationsConfig = PLACEHOLDER_TIME
-
 	//,
 	//tfc: {
 	//	name: "The Final Clean",
@@ -147,6 +146,7 @@ async function updateBackground(newPeriod = currentPeriod, newVariation = curren
 			}
 			const imageBlob = await fetchResult.blob()
 			imageCache[configObject.url] = URL.createObjectURL(imageBlob)
+			console.log(fetchResult)
 		}
 		image.src = imageCache[configObject.url]
 	} else {

@@ -50,7 +50,7 @@ const discordPattern = /^(?:(?:https?:\/\/)?(?:www\.)?(?:(?:discord)?\.?gg|disco
 
 let entryId = 0
 let path = []
-let center = [250, 250]
+let center = [canvasCenter.x, canvasCenter.y]
 
 let websiteGroupElements = []
 let subredditGroupElements = []
@@ -81,8 +81,9 @@ const periodClipboard = {
 window.initDraw = initDraw
 function initDraw() {
 	// Adds exit draw button and removes list button
-	showListButton.insertAdjacentHTML("afterend", '<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDraw" aria-controls="offcanvasDraw">Menu</button><a id="drawBackButton" class="btn btn-outline-primary" href="./">Sortir du mode dessin</a>')
+	showListButton.insertAdjacentHTML("afterend", '<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDraw" aria-controls="offcanvasDraw">Menu</button><a id="drawBackButton" class="btn btn-outline-primary" href="?">Sortir du mode dessin</a>')
 	showListButton.remove()
+	drawLink.remove()
 
 	// Opens draw menu
 	wrapper.classList.remove('listHidden')
@@ -91,10 +92,6 @@ function initDraw() {
 	window.render = render
 	window.renderBackground = renderBackground
 	window.updateHovering = updateHovering
-
-	// let startPeriodField = document.getElementById('startPeriodField')
-	// let endPeriodField = document.getElementById('endPeriodField')
-	// let periodVisbilityInfo = document.getElementById('periodVisbilityInfo')
 
 	let rShiftPressed = false
 	let lShiftPressed = false
@@ -221,7 +218,7 @@ function initDraw() {
 	})
 
 	resetButton.addEventListener("blur", function () {
-		resetButton.textContent = "Reset"
+		resetButton.textContent = "Annuler"
 		resetButton.className = "btn btn-secondary"
 	})
 
@@ -257,6 +254,7 @@ function initDraw() {
 			links: {streamer:[],discord:[],website:[],subreddit:[],wiki:[]},
 			path: {},
 			center: {},
+			atlas: ""
 		}
 
 		const pathWithPeriodsTemp = JSON.parse(JSON.stringify(pathWithPeriods))
@@ -290,6 +288,8 @@ function initDraw() {
 		if (inputStreamer.length) exportObject.links.streamer = inputStreamer
 		if (inputWiki.length) exportObject.links.wiki = inputWiki
 
+		exportObject.atlas = document.querySelector("#variants").value
+
 		return exportObject
 	}
 
@@ -301,7 +301,7 @@ function initDraw() {
 		jsonString = jsonString.join("\n    ")
 		exportArea.value = jsonString
 
-		let directPostUrl = "https://discord.gg/vAdMCCaXXR"
+		let directPostUrl = "https://discord.gg/h772bnXTzS"
 		document.getElementById("exportDirectPost").href = directPostUrl
 
 		exportModal.show()
@@ -373,10 +373,8 @@ function initDraw() {
 
 			// Rebuilds multi-input list
 			websiteGroup.replaceChildren()
-			subredditGroup.replaceChildren()
 			discordGroup.replaceChildren()
 			streamerGroup.replaceChildren()
-			wikiGroup.replaceChildren()
 			addWebsiteFields("", 0, [0])
 			//addSubredditFields("", 0, [0])
 			addDiscordFields("", 0, [0])
@@ -821,8 +819,8 @@ function initDraw() {
 	]
 
 	scaleZoomOrigin = [
-		700 / 2 - center[0],// + container.offsetLeft
-		700 / 2 - center[1]// + container.offsetTop
+		canvasCenter.x - center[0],// + container.offsetLeft
+		canvasCenter.y - center[1]// + container.offsetTop
 	]
 
 	applyView()
@@ -951,7 +949,7 @@ function initPeriodGroups() {
 			// Set zoom view
 			periodCenter = calculateCenter(path)
 			zoomOrigin = [innerContainer.clientWidth / 2 - periodCenter[0] * zoom, innerContainer.clientHeight / 2 - periodCenter[1] * zoom]
-			scaleZoomOrigin = [700 / 2 - periodCenter[0], 700 / 2 - periodCenter[1]]
+			scaleZoomOrigin = [canvasCenter.x - periodCenter[0], canvasCenter.y - periodCenter[1]]
 			applyView()
 		})
 
@@ -1018,7 +1016,7 @@ function initPeriodGroups() {
 			// Set zoom view
 			periodCenter = calculateCenter(path)
 			zoomOrigin = [innerContainer.clientWidth / 2 - periodCenter[0] * zoom, innerContainer.clientHeight / 2 - periodCenter[1] * zoom]
-			scaleZoomOrigin = [700 / 2 - periodCenter[0], 700 / 2 - periodCenter[1]]
+			scaleZoomOrigin = [canvasCenter.x - periodCenter[0], canvasCenter.y - periodCenter[1]]
 			applyView()
 		})
 		function endPeriodUpdate(value) {

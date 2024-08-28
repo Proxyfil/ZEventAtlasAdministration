@@ -21,14 +21,15 @@ let previousZoomOrigin = [0, 0]
 let previousScaleZoomOrigin = [0, 0]
 
 const backgroundCanvas = document.createElement("canvas")
-backgroundCanvas.width = 700
-backgroundCanvas.height = 700
+backgroundCanvas.width = canvasSize.x
+backgroundCanvas.height = canvasSize.y
 const backgroundContext = backgroundCanvas.getContext("2d")
 
 const wrapper = document.getElementById("wrapper")
 const bottomBar = document.getElementById("bottomBar")
 
 const showListButton = document.getElementById("showListButton")
+const drawLink = document.getElementById("drawLink")
 const offcanvasList = document.getElementById("offcanvasList")
 const bsOffcanvasList = new bootstrap.Offcanvas(offcanvasList)
 
@@ -168,7 +169,7 @@ function toggleFixed(e, tapped) {
 	}
 	fixed = !fixed
 	if (!fixed) {
-		updateHovering(e, tapped)
+		updateHovering(e)
 		render()
 	}
 	entriesList.classList.add("disableHover")
@@ -190,12 +191,12 @@ window.addEventListener("resize", function (e) {
 	// Legacy code
 	let viewportWidth = document.documentElement.clientWidth
 
-	if (document.documentElement.clientWidth > 2000 && viewportWidth <= 2000) {
+	if (document.documentElement.clientWidth > 700 && viewportWidth <= 700) {
 		entriesListShown = true
 		wrapper.classList.remove("listHidden")
 	}
 
-	if (document.documentElement.clientWidth < 2000 && viewportWidth >= 2000) {
+	if (document.documentElement.clientWidth < 700 && viewportWidth >= 700) {
 		entriesListShown = false
 		wrapper.classList.add("listHidden")
 	}
@@ -279,8 +280,8 @@ function renderBackground(atlas) {
 
 	backgroundContext.clearRect(0, 0, canvas.width, canvas.height)
 
-	//backgroundCanvas.width = 500 * zoom
-	//backgroundCanvas.height = 500 * zoom
+	//backgroundCanvas.width = 1000 * zoom
+	//backgroundCanvas.height = 1000 * zoom
 
 	//backgroundContext.lineWidth = zoom
 
@@ -473,8 +474,8 @@ function buildObjectsList(filter = null, sort = null) {
 				]
 
 				scaleZoomOrigin = [
-					700 / 2 - this.entry.center[0]
-					, 700 / 2 - this.entry.center[1]
+					canvasCenter.x - this.entry.center[0]
+					, canvasCenter.y - this.entry.center[1]
 				]
 
 				//console.log(zoomOrigin)
@@ -581,8 +582,8 @@ async function render() {
 
 	context.clearRect(0, 0, canvas.width, canvas.height)
 
-	//canvas.width = 500*zoom
-	//canvas.height = 500*zoom
+	//canvas.width = 1000*zoom
+	//canvas.height = 1000*zoom
 
 	context.globalCompositeOperation = "source-over"
 	context.clearRect(0, 0, canvas.width, canvas.height)
@@ -813,8 +814,8 @@ function highlightEntryFromUrl() {
 			]
 
 			scaleZoomOrigin = [
-				700 / 2 - entry.center[0]// + container.offsetLeft
-				, 700 / 2 - entry.center[1]// + container.offsetTop
+				canvasCenter.x - entry.center[0]// + container.offsetLeft
+				, canvasCenter.y - entry.center[1]// + container.offsetTop
 			]
 
 			//console.log(zoomOrigin)

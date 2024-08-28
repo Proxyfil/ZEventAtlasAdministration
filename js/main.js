@@ -47,8 +47,8 @@ function applyView() {
 
 	zoomOrigin = [scaleZoomOrigin[0] * zoom, scaleZoomOrigin[1] * zoom]
 
-	innerContainer.style.height = (~~(zoom * 700)) + "px"
-	innerContainer.style.width = (~~(zoom * 700)) + "px"
+	innerContainer.style.height = (~~(zoom * canvasSize.x)) + "px"
+	innerContainer.style.width = (~~(zoom * canvasSize.y)) + "px"
 
 	innerContainer.style.left = ~~(container.clientWidth / 2 - innerContainer.clientWidth / 2 + zoomOrigin[0] + container.offsetLeft) + "px"
 	innerContainer.style.top = ~~(container.clientHeight / 2 - innerContainer.clientHeight / 2 + zoomOrigin[1] + container.offsetTop) + "px"
@@ -66,8 +66,8 @@ init()
 
 async function init() {
 	// For Reviewing Reddit Changes
-	//let resp = await fetch("../tools/temp_atlas.json")
-	atlas = await (await fetch("https://atlas.proxyfil.fr/objects/admin")).text()
+	let variant = document.querySelector("#variants").value
+	atlas = await (await fetch(`https://atlas.proxyfil.fr/objects/admin/${variant}`)).text()//await (await fetch(`./data/atlas${variant}.json`)).text()
 	atlas = JSON.parse(atlas.toString())
 	atlas.sort(function (a, b) {
 		if (a.center[1] < b.center[1]) {
@@ -140,9 +140,7 @@ async function init() {
 		}
 	} else if (mode.startsWith("diff")) {
 		try {
-			const liveResp = await (await fetch("https://atlas.proxyfil.fr/objects/admin")).text()
-			let liveJson = await liveResp.json()
-			liveJson = updateAtlasAll(liveJson)
+			let liveJson = updateAtlasAll(atlas)
 
 			const liveAtlasReduced = liveJson.reduce(function (a, c) {
 				a[c.id] = c
