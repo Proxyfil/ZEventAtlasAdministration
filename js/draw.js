@@ -405,7 +405,7 @@ function initDraw() {
 
 	function renderBackground() {
 
-		backgroundContext.clearRect(0, 0, canvas.width, canvas.height)
+		backgroundContext.clearRect(0, 0, 1000, 1000)
 
 		backgroundContext.fillStyle = "rgba(0, 0, 0, 1)"
 		//backgroundContext.fillRect(0, 0, canvas.width, canvas.height)
@@ -435,7 +435,7 @@ function initDraw() {
 		if (!Array.isArray(path)) return
 
 		context.globalCompositeOperation = "source-over"
-		context.clearRect(0, 0, canvas.width, canvas.height)
+		context.clearRect(0, 0, 1000, 1000)
 
 		if (highlightUncharted) {
 			context.drawImage(backgroundCanvas, 0, 0)
@@ -444,7 +444,7 @@ function initDraw() {
 			context.fillStyle = "rgba(0, 0, 0, 0.6)"
 		}
 
-		context.fillRect(0, 0, canvas.width, canvas.height)
+		context.fillRect(0, 0, 1000, 1000)
 
 		context.beginPath()
 

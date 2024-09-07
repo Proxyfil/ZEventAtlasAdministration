@@ -70,7 +70,7 @@ el.style.top = "0px"
 el.style.zIndex = "10000"
 const ctx = el.getContext("2d")
 el.width = 1600
-el.height = 500
+el.height = 1000
 const steps = 150
 const max = 1500
 
